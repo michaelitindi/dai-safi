@@ -1,0 +1,46 @@
+rules:
+  - id: COMBO-SHA-001
+    title: Intervention combination (standard SHA covers)
+    severity: error
+    status: draft
+    check: combination_rules
+    fix: "Bill the second package in its own visit: close this visit and start a new one."
+    source: "DHA HIE docs, SHA Combination Rules (page last modified 2026-09-28)"
+    params:
+      scheme: SHA
+      skip_packages: [SHA-16]        # renal sub-code rules not encoded yet
+      rows:
+        SHA-01: {alone: true}
+        SHA-03: {allow: [SHA-07, SHA-06, SHA-09, SHA-13, SHA-08, SHA-19]}
+        SHA-05: {alone: true}
+        SHA-06: {alone: true}
+        SHA-07: {allow: [SHA-03, SHA-06, SHA-09, SHA-19]}
+        SHA-08: {allow: [SHA-03, SHA-09, SHA-07-005, SHA-07-006]}   # maternity global period not checked
+        SHA-09: {alone: true}
+        SHA-10: {alone: true}
+        SHA-12: {alone: true}
+        SHA-13: {allow: [SHA-03, SHA-06, SHA-07, SHA-09, SHA-19]}
+        SHA-18: {alone: true}
+        SHA-19: {allow: [SHA-07-002, SHA-09], after_global_period: [SHA-03, SHA-13]}
+
+  - id: COMBO-POMSF-001
+    title: Intervention combination (POMSF covers)
+    severity: error
+    status: draft
+    check: combination_rules
+    fix: "Close this visit and start a new one for the other package."
+    source: "DHA HIE docs, SHA Combination Rules, POMSF table (page last modified 2026-09-28)"
+    params:
+      scheme: POMSF
+      skip_packages: [SHA-16, PMF-10]   # DHA flags PMF-10 as ambiguous in the published sheet
+      rows:
+        PMF-03: {allow: [SHA-06, SHA-09, PMF-07, PMF-13, SHA-19, SHA-08]}
+        SHA-05: {alone: true}
+        SHA-06: {alone: true}
+        SHA-08: {allow: [PMF-07, SHA-19, PMF-03, SHA-06, SHA-09]}
+        SHA-09: {alone: true}
+        SHA-11: {alone: true}
+        PMF-12: {alone: true}
+        PMF-07: {allow: [PMF-03, SHA-06, SHA-09, PMF-13, SHA-15, SHA-19, SHA-08]}
+        PMF-13: {allow: [PMF-03, SHA-06, SHA-09, SHA-19, SHA-08]}
+        SHA-19: {allow: [PMF-07, SHA-09], after_global_period: [PMF-03, PMF-13]}
