@@ -1,0 +1,24 @@
+rules:
+  - id: SURG-001
+    title: No per-diem intervention inside the surgical global period
+    severity: warning
+    status: draft
+    check: no_per_diem_in_global_period
+    fix: "Remove the per-diem line, or move it to after the global period (update the admission to surgical complication or medical admission)."
+    source: "DHA HIE docs, Surgical Rules. Boundary convention unverified."
+
+  - id: SURG-002
+    title: Surgical claim captures admission, procedure and discharge dates
+    severity: warning
+    status: draft
+    check: surgical_dates_captured
+    fix: "Record the admission, procedure and discharge dates as three separate values."
+    source: "DHA HIE docs, Surgical Rules (three dates captured separately)"
+
+  - id: DOC-001
+    title: Required documents attached
+    severity: error
+    status: draft
+    check: required_documents
+    fix: "Add the missing documents from the patient record. They are listed on the intervention."
+    source: "DHA HIE docs, Surgical Rules / Adding Attachments (applicableDocumentTypes)"
