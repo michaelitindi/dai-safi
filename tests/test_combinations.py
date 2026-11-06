@@ -1,16 +1,20 @@
 from datetime import datetime, timezone
+from pathlib import Path
 
 from dai_safi.engine import evaluate
 from dai_safi.models import ClaimDraft, Intervention
 from dai_safi.rules import load_rules
 
 NOW = datetime(2026, 10, 22, tzinfo=timezone.utc)
-RULES = load_rules("rules", include_draft=True)
+RULES = load_rules(Path(__file__).resolve().parents[1] / "rules", include_draft=True)
 
 
 def draft(codes: list[str], scheme: str = "SHA") -> ClaimDraft:
-    return ClaimDraft(claim_ref="CLM-TEST", scheme=scheme,
-                      interventions=[Intervention(code=c) for c in codes])
+    return ClaimDraft(
+        claim_ref="CLM-TEST",
+        scheme=scheme,
+        interventions=[Intervention(code=c) for c in codes],
+    )
 
 
 def ids(codes: list[str], scheme: str = "SHA") -> set[str]:
