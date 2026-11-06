@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dai-safi"
+version = "0.0.1"
+description = "Advisory pre-submission readiness checks for Kenyan SHA claims"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.6", "pyyaml>=6"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "mypy>=1.10", "ruff>=0.5", "types-PyYAML"]
+
+[project.scripts]
+dai-safi = "dai_safi.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dai_safi"]
+
+[tool.mypy]
+strict = true
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
