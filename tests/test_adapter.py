@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from types import SimpleNamespace as NS
 
 from dai_safi.adapters.sha_claim import from_virtual_claim
@@ -13,7 +13,7 @@ def test_adapter_maps_fields_and_drops_the_consent_token() -> None:
         interventions=[NS(code="SHA-19-001", applicable_document_types=("THEATRE_NOTES",),
                           bill_from=None, is_per_diem=False)],
         attachments=[NS(attachment_type="THEATRE_NOTES")],
-        visit_start=datetime(2026, 10, 1, tzinfo=timezone.utc),
+        visit_start=datetime(2026, 10, 1, tzinfo=UTC),
         visit_end=None,
     )
     draft = from_virtual_claim(vc, complexity_by_code={"SHA-19-001": "major"})

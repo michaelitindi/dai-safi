@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from dai_safi.engine import evaluate
@@ -6,8 +6,8 @@ from dai_safi.models import ClaimDraft, Document, Intervention, Severity
 from dai_safi.rules import load_rules
 
 RULES = load_rules(Path(__file__).resolve().parents[1] / "rules", include_draft=True)
-NOW = datetime(2026, 10, 22, tzinfo=timezone.utc)
-PROC = datetime(2026, 10, 10, tzinfo=timezone.utc)
+NOW = datetime(2026, 10, 22, tzinfo=UTC)
+PROC = datetime(2026, 10, 10, tzinfo=UTC)
 
 
 def ids(draft: ClaimDraft) -> set[str]:

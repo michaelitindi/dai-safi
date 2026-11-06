@@ -1,11 +1,11 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from dai_safi.engine import evaluate
 from dai_safi.models import ClaimDraft, Intervention
 from dai_safi.rules import load_rules
 
-NOW = datetime(2026, 10, 22, tzinfo=timezone.utc)
+NOW = datetime(2026, 10, 22, tzinfo=UTC)
 RULES = load_rules(Path(__file__).resolve().parents[1] / "rules", include_draft=True)
 
 
